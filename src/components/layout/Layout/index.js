@@ -1,22 +1,10 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import Header from '../Header';
-import Sidebar from '../Sidebar';
-import './styles.css';
+import Header from '../Header'; // 確保 Header 路徑正確
+import Sidebar from '../Sidebar'; // 確保 Sidebar 路徑正確
+import './styles.css'; // 確保樣式檔案路徑正確
 
-/**
- * Layout組件 - 網站主要布局結構
- * 
- * 功能：
- * 1. 整合Header和Sidebar組件
- * 2. 提供主要內容區域的布局結構
- * 3. 實現響應式布局
- * 
- * @component
- * @param {Object} props
- * @param {React.ReactNode} props.children - 主要內容區域的子組件
- */
-const Layout = ({ children }) => {
+const Layout = () => {
   return (
     <div className="layout">
       <Header />

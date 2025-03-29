@@ -1,12 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom';
-import Layout from '../components/layout/Layout';
+import Layout from '../components/layout/Layout'; // 確保導入的是 index.js
 import PostList from '../components/forum/PostList';
-
-// 討論區頁面
-const GeneralDiscussion = () => <PostList />;
-const TransferDiscussion = () => <div>轉學生討論區</div>;
-const ProfessionalDiscussion = () => <div>專業討論群組</div>;
-const LanguageExchange = () => <div>語言交換區</div>;
+import TransferGuide from '../pages/TransferGuide';
+import TransferDiscussion from '../pages/TransferDiscussion';
 
 /**
  * 路由配置
@@ -22,25 +18,17 @@ export const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        index: true,
-        element: <GeneralDiscussion />
-      },
-      {
         path: 'general',
-        element: <GeneralDiscussion />
+        element: <PostList />,
       },
       {
-        path: 'transfer',
-        element: <TransferDiscussion />
+        path: 'transfer-guide',
+        element: <TransferGuide />,
       },
       {
-        path: 'professional',
-        element: <ProfessionalDiscussion />
+        path: 'transfer-discussion',
+        element: <TransferDiscussion />,
       },
-      {
-        path: 'language',
-        element: <LanguageExchange />
-      }
-    ]
-  }
+    ],
+  },
 ]);
