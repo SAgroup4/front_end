@@ -1,12 +1,26 @@
 import React, { useState } from 'react';
 import './styles.css';
+import { IoChatbubblesOutline } from "react-icons/io5";
+
+
+const Post = ({ post, onClick }) => {
+  return (
+    <div className="post-card" onClick={() => onClick(post)}>
+      <h3 className="post-title">#{post.title}</h3>
+      <p className="post-people">需求人數：{post.peopleCount}</p>
+    </div>
+  );
+};
 
 const PostList = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [specialRequest, setSpecialRequest] = useState('');
   const [peopleCount, setPeopleCount] = useState(1);
+  const [posts, setPosts] = useState([]);
+  const [selectedPost, setSelectedPost] = useState(null);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -26,15 +40,27 @@ const PostList = () => {
       return;
     }
 
-    // 提交邏輯（例如新增到帖子列表）
-    console.log({
+    const newPost = {
       title,
       content,
       specialRequest,
       peopleCount,
-    });
+      currentPeople: 0, // 預設目前人數為 0
+      author: '匿名用戶', // 假設的發布者
+    };
 
+    setPosts([...posts, newPost]);
     handleCloseModal();
+  };
+
+  const handlePostClick = (post) => {
+    setSelectedPost(post);
+    setIsDetailModalOpen(true);
+  };
+
+  const handleCloseDetailModal = () => {
+    setIsDetailModalOpen(false);
+    setSelectedPost(null);
   };
 
   return (
@@ -48,6 +74,12 @@ const PostList = () => {
           onClick={handleOpenModal}
           readOnly
         />
+      </div>
+
+      <div className="post-list">
+        {posts.map((post, index) => (
+          <Post key={index} post={post} onClick={handlePostClick} />
+        ))}
       </div>
 
       {isModalOpen && (
@@ -91,6 +123,26 @@ const PostList = () => {
             <div className="modal-actions">
               <button onClick={handleSubmit} className="submit-button">提交</button>
               <button onClick={handleCloseModal} className="cancel-button">取消</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {isDetailModalOpen && selectedPost && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h3>{selectedPost.title}</h3>
+            <p><strong>內文：</strong> {selectedPost.content}</p>
+            <p><strong>特殊要求：</strong> {selectedPost.specialRequest}</p>
+            <p>
+              <strong>發布者：</strong> {selectedPost.author}
+              <span className="chat-icon">
+                <IoChatbubblesOutline />
+              </span>
+            </p>
+            <p><strong>目前人數：</strong> {selectedPost.currentPeople}/{selectedPost.peopleCount}</p>
+            <div className="modal-actions">
+              <button onClick={handleCloseDetailModal} className="cancel-button">關閉</button>
             </div>
           </div>
         </div>
