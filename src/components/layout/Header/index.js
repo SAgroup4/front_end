@@ -1,5 +1,6 @@
 import React from 'react';
 import './styles.css';
+import logo from './輔大logo.png'; // 使用 import 導入圖片
 
 /**
  * Header組件 - 網站頂部導航欄
@@ -24,6 +25,7 @@ const Header = () => {
   return (
     <header className="header">
       <div className="header-logo">
+        <img src={logo} alt="輔仁大學 Logo" className="logo-image" />
         <h1>輔仁大學學生交流平台</h1>
       </div>
       
@@ -42,7 +44,6 @@ const Header = () => {
 
       <div className="header-user">
         <div className="user-avatar">
-          {/* TODO: 替換為實際的用戶頭像 */}
           <img src="/default-avatar.png" alt="用戶頭像" />
         </div>
       </div>

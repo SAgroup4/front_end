@@ -59,3 +59,14 @@
   border-radius: 50%;
   border: 2px solid white;
 }
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* 調整 logo 和標題之間的間距 */
+}
+
+.logo-image {
+  width: 40px; /* 設定 logo 寬度 */
+  height: auto; /* 自動調整高度 */
+}

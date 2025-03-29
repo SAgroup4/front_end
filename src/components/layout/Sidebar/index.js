@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './styles.css';
+import { BiAlignLeft } from "react-icons/bi";
+
 
 /**
  * Sidebar組件 - 網站左側導航欄
@@ -61,7 +63,7 @@ const Sidebar = () => {
   return (
     <aside className="sidebar">
       <nav className="sidebar-nav">
-        <h2 className="sidebar-title">主討論區</h2>
+        <h2 className="sidebar-title"><BiAlignLeft />主討論區</h2>
         <ul className="category-list">
           {categories.map((category) => (
             <li
